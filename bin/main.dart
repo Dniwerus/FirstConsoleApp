@@ -1,53 +1,41 @@
 import 'dart:io';
 
 void main() {
-  print('Добро пожаловать в простой калькулятор');
+  int a = 0;
+  int b = 0;
+  num? result;
+  var input;
+  var inputList;
+  print('Калькулятор');
+
   while (true) {
-    print('Введите первое число');
+    print('Введите уравнение');
 
-    switch (first = stdin.readLineSync() ?? '0') {
+    switch (input = stdin.readLineSync() ?? 0) {
       case 'exit':
         return;
       default:
-        first = int.parse(first);
-    }
-    print('Введите второе число');
-    switch (second = stdin.readLineSync() ?? 0) {
-      case 'exit':
-        return;
-      default:
-        second = int.parse(second);
+        inputList = input.split(' ');
     }
 
-    print('Выберите операцию над числами');
-    print('1. Сложение \n 2. Вычитание \n 3. Умножение \n 4. Деление');
-    switch (operation = stdin.readLineSync() ?? 0) {
-      case 'exit':
-        return;
-      default:
-        operation = int.parse(operation);
-    }
-
-    switch (operation) {
-      case 1:
-        print(resultat1);
-      case 2:
-        print(resultat2);
-      case 3:
-        print(resultat3);
-      case 4:
-        if (second == 0) {
-          print('На ноль нельзя делить членосос');
+    a = int.parse(inputList[0]);
+    b = int.parse(inputList[2]);
+    switch (inputList[1]) {
+      case '+':
+        result = a + b;
+      case '-':
+        result = a - b;
+      case '*':
+        result = a * b;
+      case '/':
+        if (b == 0) {
+          print('Деление на ноль невозможно');
         } else
-          print(resultat4);
+          result = a / b;
+      default:
+        print('Ошибка: Введите корректный оператор');
     }
+
+    print('$a ${inputList[1]} $b = $result');
   }
 }
-
-var first;
-var second;
-var operation;
-var resultat1 = first + second;
-var resultat2 = first - second;
-var resultat3 = first * second;
-var resultat4 = first / second;
